@@ -49,6 +49,11 @@ Route::delete('/deletedatakamar/{id}', [KamarController::class, 'destroy'])->nam
 // akhir-kamar
 
 // fasilitas
+Route::get('/tambahfasilitas', [FasilitasController::class, 'create'])->name('tambahfasilitas');
+Route::post('/insertdatafasilitas', [FasilitasController::class, 'store'])->name('insertdatafasilitas');
+Route::get('/editfasilitas/{id}', [FasilitasController::class, 'edit'])->name('editfasilitas');
+Route::put('/updatedatafasilitas/{id}', [FasilitasController::class, 'update'])->name('updatedatafasilitas');
+Route::delete('/deletedatafasilitas/{id}', [FasilitasController::class, 'destroy'])->name('deletedatafasilitas');
 // akhir-kamar
 
 // fasilitasumum

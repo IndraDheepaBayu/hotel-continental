@@ -20,15 +20,16 @@
         @foreach ($data as $row)            
         <tr>
             <th scope="row">{{ $loop->iteration  }}</th>
-            <td>{{ $row->kamar }}</td>
+            <td>{{ $row->kamar_id }}</td>
             <td>{{ $row->nama }}</td>
             <td style="display: flex;">
-                <form action="/deletedatafasilitas/{{$row->id}}" method="post" style="margin-right: 20px">
+                <a type="button" href="/editfasilitas/{{ $row->id }}" class="btn btn-warning mr-2">Edit</a>
+                <form action="/deletedatafasilitas/{{ $row->id }}" method="POST" style="margin-right:20px">
                   @csrf
-                  <button type="submit" class="btn btn-danger">Hapus</button>
                   @method('delete')
-                </form>
-                <a type="button" href="/tampilanfasilitas/{{$row->id}}" class="btn btn-warning">Edit</a>                                                         
+                  <button type="submit" class="btn btn-danger me-4">Delete</button>
+                </form>                                                               
+                                                              
             </td>
         </tr>
         @endforeach
