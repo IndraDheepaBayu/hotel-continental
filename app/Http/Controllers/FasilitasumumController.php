@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fasilitasumum;
-use App\Http\Requests\StoreFasilitasumumRequest;
-use App\Http\Requests\UpdateFasilitasumumRequest;
+use Illuminate\Http\Request;
 
 class FasilitasumumController extends Controller
 {
@@ -19,69 +18,35 @@ class FasilitasumumController extends Controller
         return view('admin.fasilitasumum.fasilitasumum',compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+
+    public function create(){
+        return view('admin.fasilitasumum.tambahfasilitasumum');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFasilitasumumRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreFasilitasumumRequest $request)
-    {
-        //
+    public function store(Request $request){
+        $this->validate($request,[
+            'kamar'=>'required', 
+            'nama'=>'required'
+        ]);
+        fasilitasumum::create($request->all());
+        return redirect()->route('fasilitasumum');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Fasilitasumum  $fasilitasumum
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Fasilitasumum $fasilitasumum)
-    {
-        //
+    public function edit($id){
+        $data = fasilitasumum::find($id);
+        return view('admin.fasilitasumum.editfasilitasumum', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Fasilitasumum  $fasilitasumum
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Fasilitasumum $fasilitasumum)
-    {
-        //
+    public function update(Request $request, $id){
+        $data = fasilitasumum::find($id);
+        $data->update($request->all());
+        return redirect()->route('fasilitasumum');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFasilitasumumRequest  $request
-     * @param  \App\Models\Fasilitasumum  $fasilitasumum
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateFasilitasumumRequest $request, Fasilitasumum $fasilitasumum)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Fasilitasumum  $fasilitasumum
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Fasilitasumum $fasilitasumum)
-    {
-        //
+    public function destroy($id){
+        $data = fasilitasumum::find($id);
+        $data->delete();
+        return redirect()->route('fasilitasumum');
     }
 }

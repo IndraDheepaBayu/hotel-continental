@@ -23,12 +23,12 @@
             <td>{{ $row->kamar }}</td>
             <td>{{ $row->nama }}</td>
             <td style="display: flex;">
-                <form action="/deletedatafasilitasumum/{{$row->id}}" method="post" style="margin-right: 20px">
-                  @csrf
-                  <button type="submit" class="btn btn-danger">Hapus</button>
-                  @method('delete')
-                </form>
-                <a type="button" href="/tampilanfasilitasumum/{{$row->id}}" class="btn btn-warning">Edit</a>                                                         
+            <a type="button" href="/editfasilitasumum/{{ $row->id }}" class="btn btn-warning mr-2">Edit</a>
+                    <form action="/deletedatafasilitasumum/{{ $row->id }}" method="POST" style="margin-right:20px">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="btn btn-danger me-4">Delete</button>
+                    </form>                                                               
             </td>
         </tr>
         @endforeach

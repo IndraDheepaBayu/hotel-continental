@@ -15,6 +15,8 @@ class CreateFasilitasumumsTable extends Migration
     {
         Schema::create('fasilitasumums', function (Blueprint $table) {
             $table->id();
+            $table->string("kamar");
+            $table->string("nama");
             $table->timestamps();
         });
     }

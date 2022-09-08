@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fasilitasumum extends Model
 {
-    use HasFactory;
+    protected $table = 'fasilitasumums';
+    protected $fillable = ['kamar', 'nama'];
 }
