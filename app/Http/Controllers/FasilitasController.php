@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
-use App\Http\Requests\StoreFasilitasRequest;
-use App\Http\Requests\UpdateFasilitasRequest;
+use Illuminate\Http\Request;
 
 class FasilitasController extends Controller
 {
@@ -19,69 +18,33 @@ class FasilitasController extends Controller
         return view('admin.fasilitas.fasilitas',compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('admin.fasilitas.tambahfasilitas');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFasilitasRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreFasilitasRequest $request)
-    {
-        //
+    public function store(Request $request){
+        $this->validate($request,[
+            'kamar_id'=>'required', 
+            'nama'=>'required'
+        ]);
+        fasilitas::create($request->all());
+        return redirect()->route('fasilitas');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Fasilitas  $fasilitas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Fasilitas $fasilitas)
-    {
-        //
+    public function edit($id){
+        $data = fasilitas::find($id);
+        return view('admin.fasilitas.editfasilitas', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Fasilitas  $fasilitas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Fasilitas $fasilitas)
-    {
-        //
+    public function update(Request $request, $id){
+        $data = fasilitas::find($id);
+        $data->update($request->all());
+        return redirect()->route('fasilitas');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFasilitasRequest  $request
-     * @param  \App\Models\Fasilitas  $fasilitas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateFasilitasRequest $request, Fasilitas $fasilitas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Fasilitas  $fasilitas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Fasilitas $fasilitas)
-    {
-        //
+    public function destroy($id){
+        $data = fasilitas::find($id);
+        $data->delete();
+        return redirect()->route('fasilitas');
     }
 }
