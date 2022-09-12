@@ -34,7 +34,16 @@ Route::get('/fasilitasumum', [FasilitasumumController::class, 'index'])->name('f
 // akhir-admin
 
 // login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get  ('/login', [LoginController::class, 'login'])->name('login');
+
+Route::post  ('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
+
+Route::get  ('/register', [LoginController::class, 'register'])->name('register');
+
+Route::post  ('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
+// loginx
+
+Route::get ('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // akhir-login
 
